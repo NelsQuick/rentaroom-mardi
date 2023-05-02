@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+{% block title %}Success
+{% endblock %}
+{% block body %}
+	<div class="card">
+		<div class="card-body">
+			<h1 class="card-title text-center">Thank you for booking a room with us !</h1><br>
+			<h3 class="card-text text-center">Your reservation has correctly been deleted!</h3><br>
+			<div class="mx-auto" style="width: 200px;"><a href={{path ('app_mesreservations')}} class="btn btn-primary mx-auto">Return to my reservations</a></div>
+		</div>
+	</div>
+{% endblock %}

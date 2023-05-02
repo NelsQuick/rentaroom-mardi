@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ReservationController!
+{% endblock %}
+
+{% block body %}
+	{# <h1 class="text-center">Reservation for
+			{{ room.name }}</h1>
+	<div class="text-center">
+		{{ form_start(form) }}
+		<h3>{{ form_row(form.startDate) }}</h3>
+		<h3>{{ form_row(form.endDate) }}</h3>
+		{{ form_row(form.save) }}
+		{{ form_end(form) }}
+		</div> #}
+
+
+	<div class="card mx-auto mt-5" style="width: 18rem;">
+		<div class="card-body">
+			<h5 class="card-title text-center">{{ room.name }}</h5>
+			<h6 class="card-subtitle mb-2 text-body-secondary text-center">Book this room</h6>
+			<h4 class="card-text">{{ form_start(form) }}</h4>
+			<h4 class="card-text text-center my-3">{{ form_row(form.startDate) }}</h4>
+			<h4 class="card-text text-center my-3">{{ form_row(form.endDate) }}</h4>
+			<h4 class="card-text text-center my-3">{{ form_row(form.save) }}</h4>
+			<h4 class="card-text text-center">{{ form_end(form) }}</h4>
+		</div>
+	</div>
+
+
+{% endblock %}

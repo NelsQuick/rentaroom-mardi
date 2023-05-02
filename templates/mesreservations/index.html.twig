@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello MesreservationsController!
+{% endblock %}
+
+{% block body %}
+	<div class="row mt-3 mx-5">
+		<h1 class='text-center'>My reservations</h1>
+		{% for reservation in reservations %}
+			<div class="col-md-4 mb-5">
+				<div class="shadow card card-bg rounded-3" style="width: 40rem;">
+					<div class="card-body">
+						<p>Réservation de
+							{{ reservation.room.name }}
+							du
+							{{ reservation.startDate|date('d/m/Y') }}
+							au
+							{{ reservation.endDate|date('d/m/Y') }}
+							de
+							{{ reservation.startDate|date('h:i:s') }}
+							a
+							{{ reservation.endDate|date('h:i:s') }}</p>
+						<div style="display:flex">
+							<form action={{ path('edit_reservation', {'id': reservation.id} ) }}>
+								<button type="submit" class="btn btn-primary">Modifier</button>
+							</form>
+							<form action={{ path('delete_reservation', {'id': reservation.id} ) }} method="post">
+								<button type="submit" class="btn btn-danger mx-3">Supprimer</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		{% endfor %}
+	{% endblock %}

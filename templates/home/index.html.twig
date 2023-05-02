@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+	<div class="card">
+		<div class="card-body">
+			<h1 class="card-title text-center">Welcome to RentaHome</h1><br>
+			<h3 class="card-text text-center">You can see all our rooms just on click on the button bellow</h3><br>
+			<div class="mx-auto" style="width: 200px;"><a href={{path ('app_rooms')}} class="btn btn-primary mx-auto">See rooms</a></div>
+		</div>
+	</div>
+{% endblock %}

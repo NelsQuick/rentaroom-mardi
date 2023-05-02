@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier une réservation{% endblock %}
+
+{% block body %}
+    <h1>Modifier une réservation</h1>
+
+    {{ form_start(form) }}
+
+    {{ form_widget(form.startDate) }}
+    {{ form_widget(form.endDate) }}
+
+    {{ form_widget(form.save) }}
+
+    {{ form_end(form) }}
+
+    {% for type, messages in app.flashes %}
+    {% for message in messages %}
+        <div class="alert alert-{{ type }}" role="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endfor %}
+
+{% endblock %}

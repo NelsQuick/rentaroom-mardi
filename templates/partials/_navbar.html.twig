@@ -1,0 +1,30 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+	<div class="container-fluid">
+		<a class="navbar-brand" href={{path('app_home')}}>RentaHome</a>
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav">
+				<li class="nav-item">
+					<a class="nav-link active" aria-current="page" href={{path('app_rooms')}}>Our Rooms</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href={{path ("app_about")}}>About</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href={{path ("app_contact")}}>Contact</a>
+				</li>
+			</ul>
+		</div>
+		<div class="d-grid gap-2 d-md-block">
+			{% if app.user %}
+				<a href={{ path ("app_logout")}} class="btn btn-primary">Déconnexion</a>
+				<a href={{ path ("app_mesreservations")}} class="btn btn-primary">My reservations</a>
+			{% else %}
+				<a href={{ path("app_login")}} class="btn btn-primary">Login</a>
+				<a href={{ path("app_register")}} class="btn btn-primary">Register</a>
+			{% endif %}
+		</div>
+	</div>
+</nav>

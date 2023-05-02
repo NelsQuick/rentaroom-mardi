@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ oneRoom.name }}
+{% endblock %}
+
+{% block body %}
+	<div class="card text-center mx-5 mt-5 mb-5">
+		<div class="card-body">
+			<h5 class="card-title">{{ oneRoom.name }}</h5>
+			<p class="card-text">{{ oneRoom.description }}</p>
+			<h6 class="card-text mb-4">This room can accommodate up to
+				{{ oneRoom.capacity }}
+				people <br> <br>
+				<p>Softwares available in this room :
+				{% for software in oneRoom.software %}
+					{{ software.name }}{% if not loop.last %},{% endif %}{% endfor %}.<br>
+				Materials available in this room :
+				{% for material in oneRoom.material %}
+					{{ material.name }}{% if not loop.last %},{% endif %}{% endfor %}.<br>
+				Ergonomics available in this room :
+				{% for ergonomics in oneRoom.ergonomics %}
+					{{ ergonomics.name }}{% if not loop.last %},{% endif %}{% endfor %}.<br></p> 
+
+
+				<img src="https://source.unsplash.com/random/1370x400/?workspace" alt="Room">
+				<img class="my-4" src="https://source.unsplash.com/random/1370x400/?desk" alt="Room">
+				<br>
+				<a href="{{path ("app_reservation", {'id': oneRoom.id }) }}" class="btn btn-primary">Book this room</a>
+				<a href={{path ("app_rooms")}} class="btn btn-primary">Return to our rooms</a>
+			</div>
+		</div>
+	{% endblock %}
