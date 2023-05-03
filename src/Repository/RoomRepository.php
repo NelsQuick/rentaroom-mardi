@@ -5,7 +5,6 @@ namespace App\Repository;
 use App\Entity\Room;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Doctrine\ORM\EntityRepository;
 
 
 /**
@@ -40,55 +39,52 @@ class RoomRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+    /**
+     * Recherche des entités Room par critères.
+     *
+     * @param array $criteria Les critères de recherche
+     *
+     * @return Room[] Les entités Room correspondant aux critères
+     */
     public function findByCriteria(array $criteria)
     {
+        // Création d'un QueryBuilder pour l'entité Room
         $queryBuilder = $this->createQueryBuilder('r');
+
+        // Jointure sur l'entité Material
         $queryBuilder->join('r.material', 'm');
+
+        // Jointure sur l'entité Software
         $queryBuilder->join('r.software', 's');
+
+        // Jointure sur l'entité Ergonomics
         $queryBuilder->join('r.ergonomics', 'e');
 
-        if (!empty($criteria['material'])) {
-            $queryBuilder->andWhere('m.id IN (:material)')
-                ->setParameter('material', $criteria['material']);
+        // Ajout d'une condition sur la capacité minimal de la salle
+        if (isset($criteria['capacity'])) {
+            $queryBuilder->andWhere('r.capacity >= :capacity')
+                ->setParameter('capacity', $criteria['capacity']);
+        }
+        
+        // Ajout d'une condition sur l'ID du Material
+        foreach($criteria['material'] as $material){
+            $queryBuilder->andWhere('m IN (:material)')
+                ->setParameter('material', $material);
         }
 
-        if (!empty($criteria['software'])) {
-            $queryBuilder->andWhere('            s.id IN (:software)')
-            ->setParameter('software', $criteria['software']);
+        // Ajout d'une condition sur l'ID du Software
+        foreach($criteria['software'] as $software){
+            $queryBuilder->andWhere('s IN (:software)')
+                ->setParameter('software', $software);
+        }
+
+        // Ajout d'une condition sur l'ID du Ergonomics
+        foreach($criteria['ergonomics'] as $ergonomic){
+            $queryBuilder->andWhere('e IN (:ergonomics)')
+                ->setParameter('ergonomics', $ergonomic);
+        }
+
+        // Exécution de la requête et retour des résultats
+        return $queryBuilder->getQuery()->getResult();
     }
-
-    if (!empty($criteria['ergonomics'])) {
-        $queryBuilder->andWhere('e.id IN (:ergonomics)')
-            ->setParameter('ergonomics', $criteria['ergonomics']);
-    }
-
-    return $queryBuilder->getQuery()->getResult();
 }
-}
-
-
-
-//    /**
-//     * @return Room[] Returns an array of Room objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('r')
-//            ->andWhere('r.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('r.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?Room
-//    {
-//        return $this->createQueryBuilder('r')
-//            ->andWhere('r.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }

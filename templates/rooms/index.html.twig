@@ -1,48 +1,68 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Welcome to our rooms!
-{% endblock %}
-{% block body %}
-	{# {% if rooms|length > 0 %}
-	    <p>{{ rooms|length }} résultats trouvés</p>
-	{% endif %} #}
-	{{ form_start(form) }}
-	<div>
-		{{ form_label(form.material) }}
-		{{ form_widget(form.material) }}
-	</div>
-	<div>
-		{{ form_label(form.software) }}
-		{{ form_widget(form.software) }}
-	</div>
-	<div>
-		{{ form_label(form.ergonomics) }}
-		{{ form_widget(form.ergonomics) }}
-	</div>
-	{{ form_widget(form.filter) }}
-	{{ form_end(form) }}
+{% block title %}Welcome to our rooms!{% endblock %}
 
-	<div class="row mt-3 mx-5">
-		<h1 class='text-center'>ROOMS</h1>
-		{% for room in rooms %}
-			<div class="col-md-4 mb-5">
-				<div class="shadow card card-bg rounded-3" style="width: 40rem;">
-					<div class="card-body">
-						<div class="text-center">
-							<h5 class="card-title">{{ room.name }}
-								-
-								{{ room.capacity }}
-								people</h5>
-						</div>
-						<div class="text-center">
-							<p class="card-text">{{ room.description }}</p>
-						</div>
-						<div class="text-center mt-3">
-							<a href={{ path("show_room", { id: room.id } )}} class="btn btn-primary">Show the room</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		{% endfor %}
-	</div>
+{% block body %}
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-6 col-md-8 col-sm-10">
+      <div class="card shadow p-3 mb-5 bg-white rounded">
+        <div class="card-body">
+          <h4 class="card-title text-center mb-4">Search Filter</h4>
+          {{ form_start(form) }}
+            <div class="form-group">
+              {{ form_label(form.capacity, 'Capacity') }}
+              {{ form_widget(form.capacity, {'attr': {'class': 'form-control', 'placeholder': 'Enter Capacity'}}) }}
+            </div>
+            <div class="form-group">
+              {{ form_label(form.material, 'Material') }}
+              {{ form_widget(form.material, {'attr': {'class': 'form-control', 'placeholder': 'Enter Material'}}) }}
+            </div>
+            <div class="form-group">
+              {{ form_label(form.software, 'Software') }}
+              {{ form_widget(form.software, {'attr': {'class': 'form-control', 'placeholder': 'Enter Software'}}) }}
+            </div>
+            <div class="form-group">
+              {{ form_label(form.ergonomics, 'Ergonomics') }}
+              {{ form_widget(form.ergonomics, {'attr': {'class': 'form-control', 'placeholder': 'Enter Ergonomics'}}) }}
+            </div>
+            <div class="text-center mt-3">{{ form_end(form) }}</div>
+            {% if rooms|length > 0 %}
+              <hr>
+              <div class="results">
+                <h5 class="text-center">{{ rooms|length }} Rooms Found :</h5>
+              </div>
+            {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row mt-3 mx-5">
+  <div class="col-md-12">
+    <h1 class='text-center'>ROOMS</h1>
+    <hr>
+  </div>
+  {% for room in rooms %}
+    <div class="col-md-4 mb-5">
+      <div class="shadow card card-bg rounded-3" style="width: 40rem;">
+        <div class="card-body">
+          <div class="text-center">
+            <h5 class="card-title">{{ room.name }}
+              -
+              {{ room.capacity }}
+              people</h5>
+          </div>
+          <div class="text-center">
+            <p class="card-text">{{ room.description }}</p>
+          </div>
+          <div class="text-center mt-3">
+            <a href={{ path("show_room", { id: room.id } )}} class="btn btn-primary">Show the room</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</div>
 {% endblock %}

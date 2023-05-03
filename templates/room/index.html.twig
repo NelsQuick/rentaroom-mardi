@@ -1,33 +1,43 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-	{{ oneRoom.name }}
+  {{ oneRoom.name }}
 {% endblock %}
 
 {% block body %}
-	<div class="card text-center mx-5 mt-5 mb-5">
-		<div class="card-body">
-			<h5 class="card-title">{{ oneRoom.name }}</h5>
-			<p class="card-text">{{ oneRoom.description }}</p>
-			<h6 class="card-text mb-4">This room can accommodate up to
-				{{ oneRoom.capacity }}
-				people <br> <br>
-				<p>Softwares available in this room :
-				{% for software in oneRoom.software %}
-					{{ software.name }}{% if not loop.last %},{% endif %}{% endfor %}.<br>
-				Materials available in this room :
-				{% for material in oneRoom.material %}
-					{{ material.name }}{% if not loop.last %},{% endif %}{% endfor %}.<br>
-				Ergonomics available in this room :
-				{% for ergonomics in oneRoom.ergonomics %}
-					{{ ergonomics.name }}{% if not loop.last %},{% endif %}{% endfor %}.<br></p> 
-
-
-				<img src="https://source.unsplash.com/random/1370x400/?workspace" alt="Room">
-				<img class="my-4" src="https://source.unsplash.com/random/1370x400/?desk" alt="Room">
-				<br>
-				<a href="{{path ("app_reservation", {'id': oneRoom.id }) }}" class="btn btn-primary">Book this room</a>
-				<a href={{path ("app_rooms")}} class="btn btn-primary">Return to our rooms</a>
-			</div>
-		</div>
-	{% endblock %}
+<div class="container py-5">
+  <div class="card border-0 shadow-sm">
+    <img src="https://source.unsplash.com/random/1370x400/?workspace" class="card-img-top" alt="Room">
+    <div class="card-body">
+      <h1 class="card-title h3">{{ oneRoom.name }}</h1>
+      <p class="card-text">{{ oneRoom.description }}</p>
+      <h2 class="card-subtitle h5 mt-4 mb-3">Capacity:</h2>
+      <p class="card-text">{{ oneRoom.capacity }} people</p>
+      <h2 class="card-subtitle h5 mt-4 mb-3">Softwares:</h2>
+      <p class="card-text">
+        {% for software in oneRoom.software %}
+          {{ software.name }}
+          {% if not loop.last %},{% endif %}
+        {% endfor %}
+      </p>
+      <h2 class="card-subtitle h5 mt-4 mb-3">Materials:</h2>
+      <p class="card-text">
+        {% for material in oneRoom.material %}
+          {{ material.name }}
+          {% if not loop.last %},{% endif %}
+        {% endfor %}
+      </p>
+      <h2 class="card-subtitle h5 mt-4 mb-3">Ergonomics:</h2>
+      <p class="card-text">
+        {% for ergonomics in oneRoom.ergonomics %}
+          {{ ergonomics.name }}
+          {% if not loop.last %},{% endif %}
+        {% endfor %}
+      </p>
+      <a href="{{ path('app_reservation', {'id': oneRoom.id}) }}" class="btn btn-primary me-3">Book this room</a>
+      <a href="{{ path('app_rooms') }}" class="btn btn-outline-primary">Return to our rooms</a>
+    </div>
+    <img src="https://source.unsplash.com/random/1370x400/?desk" class="card-img-bottom" alt="Room">
+  </div>
+</div>
+{% endblock %}

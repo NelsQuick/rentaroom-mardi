@@ -1,36 +1,95 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello MesreservationsController!
+{% block title %}My reservations{% endblock %}
+
+{% block stylesheets %}
+  {{ parent() }}
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <style>
+    .card-bg {
+      background-color: #f8f9fa;
+    }
+
+    .card-title {
+      font-size: 1.2rem;
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+
+    .card-text {
+      font-size: 0.9rem;
+    }
+
+    .btn-action {
+      font-size: 0.8rem;
+      padding: 0.5rem 1rem;
+      border-radius: 0.3rem;
+      transition: all 0.2s ease;
+    }
+
+    .btn-edit {
+      color: #fff;
+      background-color: #007bff;
+      border-color: #007bff;
+    }
+
+    .btn-edit:hover {
+      background-color: #0069d9;
+      border-color: #0062cc;
+    }
+
+    .btn-delete {
+      color: #fff;
+      background-color: #dc3545;
+      border-color: #dc3545;
+    }
+
+    .btn-delete:hover {
+      background-color: #c82333;
+      border-color: #bd2130;
+    }
+
+    @media screen and (min-width: 576px) {
+      .card-body {
+        padding: 1.5rem;
+      }
+    }
+  </style>
 {% endblock %}
 
 {% block body %}
-	<div class="row mt-3 mx-5">
-		<h1 class='text-center'>My reservations</h1>
-		{% for reservation in reservations %}
-			<div class="col-md-4 mb-5">
-				<div class="shadow card card-bg rounded-3" style="width: 40rem;">
-					<div class="card-body">
-						<p>Réservation de
-							{{ reservation.room.name }}
-							du
-							{{ reservation.startDate|date('d/m/Y') }}
-							au
-							{{ reservation.endDate|date('d/m/Y') }}
-							de
-							{{ reservation.startDate|date('h:i:s') }}
-							a
-							{{ reservation.endDate|date('h:i:s') }}</p>
-						<div style="display:flex">
-							<form action={{ path('edit_reservation', {'id': reservation.id} ) }}>
-								<button type="submit" class="btn btn-primary">Modifier</button>
-							</form>
-							<form action={{ path('delete_reservation', {'id': reservation.id} ) }} method="post">
-								<button type="submit" class="btn btn-danger mx-3">Supprimer</button>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
+  <div class="container my-5">
+    <h1 class="text-center mb-4">My reservations</h1>
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+      {% for reservation in reservations %}
+        <div class="col">
+          <div class="card h-100 card-bg">
+            <div class="card-body">
+              <h5 class="card-title">{{ reservation.room.name }}</h5>
+              <p class="card-text">{{ reservation.startDate|date('F j, Y, g:i a') }} - {{ reservation.endDate|date('F j, Y, g:i a') }}</p>
+            </div>
+            <div class="card-footer d-flex justify-content-end">
+              <form action="{{ path('edit_reservation', {'id': reservation.id} ) }}">
+                <button type="submit" class="btn btn-action btn-edit me-2">Edit</button>
+              </form>
+              <form onclick="return confirm('Do you really want to delete this reservation ?')" action="{{ path('delete_reservation', {'id': reservation.id} ) }}" method="post">
+                <button type="submit" class="btn btn-action btn-delete">Delete</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}
 
-		{% endfor %}
-	{% endblock %}
+{% block javascripts %}
+  {{ parent() }}
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script>
+    flatpickr(".flatpickr", {
+      enableTime: true,
+      dateFormat: "Y-m-d H:i",
+    });
+  </script>
+{% endblock %}

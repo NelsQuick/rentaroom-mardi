@@ -1,12 +1,21 @@
 {% extends 'base.html.twig' %}
-{% block title %}Success
-{% endblock %}
+
+{% block title %}Edit Success{% endblock %}
+
 {% block body %}
-	<div class="card">
-		<div class="card-body">
-			<h1 class="card-title text-center">Thank you for booking a room with us !</h1><br>
-			<h3 class="card-text text-center">Your reservation has correctly been edited!</h3><br>
-			<div class="mx-auto" style="width: 200px;"><a href={{path ('app_mesreservations')}} class="btn btn-primary mx-auto">Return to my reservations</a></div>
-		</div>
-	</div>
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-6">
+      <div class="card border-0 shadow-lg">
+        <div class="card-body">
+          <h1 class="card-title text-center mb-5">Thank you for booking a room with us!</h1>
+          <h3 class="card-text text-center mb-4">Your reservation has been successfully edited.</h3>
+          <div class="d-grid gap-2 col-6 mx-auto">
+            <a href="{{ path('app_mesreservations') }}" class="btn btn-primary">Return to My Reservations</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}

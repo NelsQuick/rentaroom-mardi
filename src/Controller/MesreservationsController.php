@@ -12,12 +12,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
-
 class MesreservationsController extends AbstractController
 {
+    // Définition de la route pour la page de mes réservations
     #[Route('/mesreservations', name: 'app_mesreservations')]
-
-
     public function mesReservations(ManagerRegistry $doctrine)
     {
         $user = $this->getUser(); // Obtenez l'utilisateur connecté
@@ -29,7 +27,7 @@ class MesreservationsController extends AbstractController
         ]);
     }
 
-    // Route qui permet de supprimer une réservation
+    // Définition de la route pour la suppression d'une réservation
     #[Route('reservation/{id}/delete', name: 'delete_reservation', methods: ['GET', 'POST'])]
     public function delete(Reservation $reservation, ManagerRegistry $doctrine): Response
     {
@@ -47,7 +45,7 @@ class MesreservationsController extends AbstractController
         return $this->render('mesreservations/delete.success.html.twig');
     }
 
-
+    // Définition de la route pour l'édition d'une réservation
     #[Route('reservation/{id}/edit', name: 'edit_reservation', methods: ['GET', 'POST'])]
     public function edit(Request $request, Reservation $reservation, ManagerRegistry $doctrine): Response
     {
@@ -76,5 +74,5 @@ class MesreservationsController extends AbstractController
             'reservation' => $reservation,
             'form' => $form->createView(),
         ]);
-}
+    }
 }

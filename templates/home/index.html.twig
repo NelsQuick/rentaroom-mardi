@@ -1,13 +1,85 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Home{% endblock %}
+{% block title %}Home
+{% endblock %}
 
 {% block body %}
-	<div class="card">
-		<div class="card-body">
-			<h1 class="card-title text-center">Welcome to RentaHome</h1><br>
-			<h3 class="card-text text-center">You can see all our rooms just on click on the button bellow</h3><br>
-			<div class="mx-auto" style="width: 200px;"><a href={{path ('app_rooms')}} class="btn btn-primary mx-auto">See rooms</a></div>
+	<header class="bg-dark text-white py-5">
+		<div class="container px-4 px-lg-5 my-5">
+			<div class="text-center">
+				<h1 class="display-4 fw-bolder">Welcome to RentaRoom</h1>
+				<p class="lead mb-0">Find and book your perfect workspace</p>
+			</div>
+		</div>
+	</header>
+
+	<section class="py-5">
+		<div class="container px-4 px-lg-5 mt-5">
+			<div class="row justify-content-center">
+				<div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+					<div class="card h-100 border-0 shadow">
+						<img class="card-img-top" src="https://source.unsplash.com/random/500x325/?workspace" alt="Workspace">
+						<div class="card-body text-center">
+							<h5 class="card-title fw-bolder mb-0">Flexible workspace</h5>
+							<div class="card-text mb-3">From hot desks to private offices</div>
+							<a href={{ path("app_rooms")}} class="btn btn-primary">Learn More</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+					<div class="card h-100 border-0 shadow">
+						<img class="card-img-top" src="https://source.unsplash.com/random/500x325/?meetingroom" alt="Meeting Rooms">
+						<div class="card-body text-center">
+							<h5 class="card-title fw-bolder mb-0">Meeting Rooms</h5>
+							<div class="card-text mb-3">Book a meeting room for your team</div>
+							<a href={{ path("app_rooms")}} class="btn btn-primary">Learn More</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+					<div class="card h-100 border-0 shadow">
+						<img class="card-img-top" src="https://source.unsplash.com/random/500x325/?eventspaces" alt="Event Spaces">
+						<div class="card-body text-center">
+							<h5 class="card-title fw-bolder mb-0">Event Spaces</h5>
+							<div class="card-text mb-3">Host your next event at Workspace</div>
+							<a href={{ path("app_rooms")}} class="btn btn-primary">Learn More</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="bg-light py-5">
+		<div class="container px-4 px-lg-5 mt-5">
+			<div class="row justify-content-center">
+				<div class="col-lg-8 col-md-10 col-sm-12 text-center">
+					<h2 class="fw-bolder mb-4">Why Choose Workspace?</h2>
+					<p class="lead mb-4">At Workspace, we're committed to providing our clients with the best possible experience.</p>
+				</div>
+			</div>
 		</div>
 	</div>
+</section>
+<div class="container my-5">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <h2>Subscribe to our newsletter</h2>
+      <form>
+        <div class="form-group">
+          <label for="email">Email adress :</label>
+          <input type="email" class="form-control" id="email" placeholder="Enter your email adress">
+        </div>
+        <div class="form-group">
+          <label for="nom">Name :</label>
+          <input type="text" class="form-control" id="name" placeholder="Enter your name">
+        </div>
+        <div class="form-group my-4 text-center">
+          <button onclick="return confirm('You succesfully subscribed to our newsletter :)')" type="submit" class="btn btn-primary">Subscribe</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
 {% endblock %}
