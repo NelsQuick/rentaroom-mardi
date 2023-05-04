@@ -22,7 +22,7 @@ class ReservationController extends AbstractController
         // Récupérer l'objet de la chambre correspondant à l'id dans l'URL
         $room = $doctrine->getRepository(Room::class)->find($id);
 
-        // Si la chambre n'existe pas, renvoyer une erreur 404
+        // Si la chambre n'existe pas, renvoyer une erreur
         if (!$room) {
             throw $this->createNotFoundException('The room does not exist');
         }

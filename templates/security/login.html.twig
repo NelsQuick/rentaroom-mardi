@@ -31,6 +31,7 @@
                     </div>
 
                     <div class="d-flex justify-content-between align-items-center mb-3">
+                        <p class="m-0">Forgot password ? Reset <a href={{ path('app_forgot_password_request')}}>here</a></p>
                         <p class="m-0">No account yet? Register right <a href={{ path('app_register')}}>here</a></p>
                         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
                         <button class="btn btn-primary" type="submit">Sign in</button>
